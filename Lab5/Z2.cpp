@@ -11,8 +11,10 @@ void fun(char* s, char& needle) {
 	int curLength = 0;
 
 	while(*s != 0) {
-		/*for(int i = 0; i < LEN; i++) {
-			if(*s == needle[i]) {
+		cout << *s << endl;
+		for(int i = 0; i < LEN - 1; i++) {
+			cout << "\t" << (&needle)[i] << endl;
+			if(*s == (&needle)[i]) {
 				isSubstr = true;
 				++s;
 				continue;
@@ -21,12 +23,13 @@ void fun(char* s, char& needle) {
 				if(curLength > maxLength) {
 					maxLength = curLength;
 					maxStart = curStart;
-					curStart = ++s;
 				}
+				curStart = ++s;
+				curLength = 0;
 				break;
 			}
-		}*/
-		if(*s == needle) {
+		}
+/*		if(*s == needle) {
 			curLength++;
 			++s;
 		} else {
@@ -34,23 +37,23 @@ void fun(char* s, char& needle) {
         	                maxLength = curLength;
                                 maxStart = curStart;
                         }
-                                curStart = ++s;
-				curLength = 0;
+                        curStart = ++s;
+			curLength = 0;
 	
-		}
-/*		if(isSubstr) {
-			curLength++;
 		}*/
+		if(isSubstr) {
+			curLength++;
+		}
 	}
 	cout << "maxLength: " << maxLength << endl;
 	cout << "Poczatek: " << maxStart << endl;
-	cout << "Koniec: " << maxStart + maxLength << endl;
+	cout << "Koniec: " << maxStart + (maxLength * (LEN - 1)) << endl;
 
 }
 
 int main() {
-        char tab = 'a';
-	char (&needle) = tab;
+        char tab[LEN] = "ab";
+	char (&needle) [LEN] = tab;
 	char* haystack = "abaac aaababbba";
-	fun(haystack, needle);
+	fun(haystack, *needle);
 }
